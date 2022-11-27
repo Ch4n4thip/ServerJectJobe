@@ -292,7 +292,7 @@ exports.ToHistory = async (req, res) => {
           //res.status(200).send({message: "Success"})
   
           jwt.sign(
-            payload , "logmail" , { expiresIn : 3600 } , ( err, token) => {
+            payload  , { expiresIn : 3600 } , ( err, token) => {
               if(err) { throw err ; }
                res.status(200).json({token,payload})
             }
