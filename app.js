@@ -5,9 +5,7 @@ require('dotenv').config()
 
 const mongoUtil = require('./config/database')
 const Seller = require('./routes/Seller.route')
-const productCart = require('./routes/Product.route')
-const Customer = require('./routes/Customer.route')
-const Admin = require('./routes/Admin.route')
+
 
 const corsOptions = {
     origin: '*',
@@ -15,8 +13,7 @@ const corsOptions = {
 }
 app.use(express.json())
 app.use(cors(corsOptions))
-//test
-// app.use(express.static('public'))
+app.use(express.static('public'))
 app.get('/', (req, res) => {
     res.status(200).json({
         status: 200,
@@ -25,7 +22,5 @@ app.get('/', (req, res) => {
 })
 
 app.use('/Seller', Seller)
-app.use('/Product', productCart)
-app.use('/Customer', Customer)
-app.use('/Admin', Admin)
+
 module.exports = app;
