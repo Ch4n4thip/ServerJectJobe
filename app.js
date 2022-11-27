@@ -5,7 +5,9 @@ require('dotenv').config()
 
 const mongoUtil = require('./config/database')
 const Seller = require('./routes/Seller.route')
-
+const productCart = require('./routes/Product.route')
+// const Customer = require('./routes/Customer.route')
+// const Chat = require('./routes/chat.route')
 
 const corsOptions = {
     origin: '*',
@@ -22,5 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/Seller', Seller)
-
+app.use('/Product', productCart)
+// app.use('/Customer', Customer)
+// app.use('/Chat' , Chat)
 module.exports = app;
