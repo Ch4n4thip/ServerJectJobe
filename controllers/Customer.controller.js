@@ -1,7 +1,7 @@
 const mongoUtil = require("../config/database");
 const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 
 exports.ToHistory = async (req, res) => {
     const client = new MongoClient(process.env.MONGODB_URI);
@@ -260,60 +260,60 @@ exports.ToHistory = async (req, res) => {
       
   };
 
-  // exports.login = async (req, res) => {
-  //   const client = new MongoClient(process.env.MONGODB_URI);
-  //   await client.connect();
+  exports.login = async (req, res) => {
+    const client = new MongoClient(process.env.MONGODB_URI);
+    await client.connect();
     
-  //   const { email, password } = req.body
-  //   const dbo = client.db(process.env.DB_NAME);
+    const { email, password } = req.body
+    const dbo = client.db(process.env.DB_NAME);
 
-  //   try {
-  //     // console.log(useQuery)
-  //     var CheckM = await dbo.collection("User").findOne({ email })
+    try {
+      // console.log(useQuery)
+      var CheckM = await dbo.collection("User").findOne({ email })
    
-  //       const payload = {
-  //       user: {
-  //         email: CheckM.email,
-  //         name: CheckM.name,
-  //         role: CheckM.role,
-  //         tel: CheckM.Tel,
-  //         birthdate: CheckM.birthdate ,
-  //         gender: CheckM.gender,
-  //         address: CheckM.Address
-  //       }
-  //     }
+        const payload = {
+        user: {
+          email: CheckM.email,
+          name: CheckM.name,
+          role: CheckM.role,
+          tel: CheckM.Tel,
+          birthdate: CheckM.birthdate ,
+          gender: CheckM.gender,
+          address: CheckM.Address
+        }
+      }
   
-  //   //console.log(CheckM)
-  //   //console.log(password)
-  //     if (CheckM) {
-  //       if(CheckM.Status === "Banned"){ res.status(400).json("Banned")}
+    //console.log(CheckM)
+    //console.log(password)
+      if (CheckM) {
+        if(CheckM.Status === "Banned"){ res.status(400).json("Banned")}
         
-  //       if (CheckM.password == password) {
-  //         //res.status(200).send({message: "Success"})
+        if (CheckM.password == password) {
+          //res.status(200).send({message: "Success"})
   
-  //         jwt.sign(
-  //           payload , "logmail" , { expiresIn : 3600 } , ( err, token) => {
-  //             if(err) { throw err ; }
-  //              res.status(200).json({token,payload})
-  //           }
+          jwt.sign(
+            payload , "logmail" , { expiresIn : 3600 } , ( err, token) => {
+              if(err) { throw err ; }
+               res.status(200).json({token,payload})
+            }
   
-  //         )
-  //       //  console.log(payload)
+          )
+        //  console.log(payload)
           
-  //       }
-  //       else { res.status(400).send({message: "Email or password incorrect"}) }
-  //     }else { 
-  //       return res.status(400).send({message: "Don't have this email"}) 
-  //     }
+        }
+        else { res.status(400).send({message: "Email or password incorrect"}) }
+      }else { 
+        return res.status(400).send({message: "Don't have this email"}) 
+      }
       
-  //   } catch (err) {
-  //     res.status(400).send({ message: "Error to get data", err });
-  //   }
+    } catch (err) {
+      res.status(400).send({ message: "Error to get data", err });
+    }
 
    
         
       
-  // };
+  };
 
   exports.getOrder = async (req, res) => {
     const client = new MongoClient(process.env.MONGODB_URI);
